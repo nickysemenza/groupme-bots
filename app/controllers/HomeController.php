@@ -17,8 +17,27 @@ class HomeController extends BaseController {
 
 	public function showWelcome()
 	{
+
         //return Infractions::all()->toArray();
 	}
+    public function csbuddies_rankings()
+    {
+        $scores=array();
+                $all=Infractions::all();
+                foreach($all as $each)
+                {
+                    if(isset($scores[$each->offender])) {
+                        $scores[$each->offender]++;
+                    }
+                    else
+                    {
+                        $scores[$each->offender]=1;
+                    }
+                }
+                arsort($scores);
+        $data=Infractions::all()->toArray();
+        return View::make('rankings',compact('data','scores'));
+    }
 
     public function getCount($name,$type="whitegirl")
     {
@@ -58,8 +77,6 @@ class HomeController extends BaseController {
                 $all=Infractions::all();
                 foreach($all as $each)
                 {
-                    //$value =  isset($scores[$each->offender]) ? $scores[$each->offender] : 0;
-                    //$this->er($each->offender);
                     if(isset($scores[$each->offender])) {
                         $scores[$each->offender]++;
                     }
@@ -80,7 +97,7 @@ class HomeController extends BaseController {
             }
             if(substr($text, 0, 6)=="!!help")
             {
-                $this->sendMessage("Commands:\n\t!!report [name] [reason for being a white girl]\n\t!!scores ");
+                $this->sendMessage("Commands:\n\t!!report [name] [reason for being a white girl]\n\t!!scores\nAbout:\n\tSource Code: https://github.com/nickysemenza/groupme-bots");
             }
 
 

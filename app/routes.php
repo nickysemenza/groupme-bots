@@ -15,4 +15,5 @@ Route::get('/', 'HomeController@showWelcome');
 
 Route::get('/csbuddies','HomeController@csbuddies');
 Route::post('/csbuddies','HomeController@csbuddies');
+Route::get('/rankings','HomeController@csbuddies_rankings');
 
