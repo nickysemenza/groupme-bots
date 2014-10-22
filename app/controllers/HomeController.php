@@ -51,7 +51,7 @@ class HomeController extends BaseController {
         {
             $text=$callback->text;
             $name=$callback->name;
-            if(substr($text, 0, 8)=="!!report")
+            if(substr($text, 0, 7)=="!report")
             {
                 $pieces = explode(" ", $text);
                 if(sizeof($pieces)>2)
@@ -65,13 +65,13 @@ class HomeController extends BaseController {
                         'reporter' => $name);
                     $this->er($arr);
                     $infraction = Infractions::Create($arr);
-                    $this->sendMessage("White girl reported for ".$offender.". They now have ".$this->getCount($offender)." white girl points");
+                    $this->sendMessage($offender." reported for being a white girl. They now have ".$this->getCount($offender)." white girl points");
 
 
 
                 }
             }
-            if(substr($text, 0, 7)=="!!score")
+            if(substr($text, 0, 5)=="!rank")
             {
                 $scores=array();
                 $all=Infractions::all();
@@ -91,13 +91,13 @@ class HomeController extends BaseController {
                 {
                     $message = $message.str_pad($key,8).$val."\n";
                 }
-                $this->sendMessage($message);
+                $this->sendMessage($message."View Full Rankings: http://groupme.nickysemenza.com/rankings");
 
 
             }
-            if(substr($text, 0, 6)=="!!help")
+            if(substr($text, 0, 5)=="!help")
             {
-                $this->sendMessage("Commands:\n\t!!report [name] [reason for being a white girl]\n\t!!scores\nAbout:\n\tSource Code: https://github.com/nickysemenza/groupme-bots");
+                $this->sendMessage("Commands:\n\t!report [name] [reason for being a white girl]\n\t!rankings\nAbout:\n\tView Full Rankings: http://groupme.nickysemenza.com/rankings\n\tSource Code: https://github.com/nickysemenza/groupme-bots");
             }
 
 
