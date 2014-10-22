@@ -16,8 +16,8 @@ class HomeController extends BaseController {
 	*/
 
 	public function showWelcome()
-	{
-
+	{  
+        return "hi";
         //return Infractions::all()->toArray();
 	}
     public function csbuddies_rankings()
